@@ -44,25 +44,24 @@
     
         document.getElementById('searchBtn').addEventListener('click', function () {
             fetch('https://api.openweathermap.org/data/2.5/weather?q='+cityInput.value+'&appid=25b07f69a8c8d7611c1b17daa52eaca1&units=metric')
+
                 .then(res => res.json())
                 .then(data => {
-                    //document.getElementById('cityName').value = data.cityName;
-    
+
                     let cityName = data['name'];
                     let countryName = data.sys['country'];
                     let temperature = data ['main']['temp'];
                     let weatherDes = data.weather[0]['main'];
                     let weatherIcon = data.weather[0]['icon'];
                     var weatherStatusIcon = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
-                   
-                    console.log(cityName,countryName,weatherDes,temperature,weatherStatusIcon); 
+
                     document.getElementById('cityCountryName').innerText = cityName+', '+countryName;
                     document.getElementById('temperature').innerText = temperature;
                     document.getElementById('weatherDes').innerText = weatherDes;
                     document.getElementById('weatherStatusIcon').append = weatherStatusIcon;
 
-
                 })
+
                 .catch(error => alert('Wrong City Name'));
         })
     </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Temperature Hot</title>
+    <title>Weather App</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,10 +29,7 @@
             </div>
         </form>
         <div class="weather-status text-white text-center">
-            <div id="weatherStatusIcon">
-                <img id="weatherStatusIcon"  src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
-            </div>
-            
+            <img id="weatherStatusIcon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
             <h1 id="cityCountryName">Dhaka, BD</h1>
             <h3><span id="temperature">28.8</span>&deg;C</h3>
             <h1 id="weatherDes" class="lead">Cloudy</h1>
@@ -41,28 +38,31 @@
 
     <script>
         const cityInput = document.getElementById('cityInput');
-    
+
         document.getElementById('searchBtn').addEventListener('click', function () {
-            fetch('https://api.openweathermap.org/data/2.5/weather?q='+cityInput.value+'&appid=25b07f69a8c8d7611c1b17daa52eaca1&units=metric')
+
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityInput.value +
+                    '&appid=25b07f69a8c8d7611c1b17daa52eaca1&units=metric')
 
                 .then(res => res.json())
                 .then(data => {
 
+                    console.log(data);
                     let cityName = data['name'];
                     let countryName = data.sys['country'];
-                    let temperature = data ['main']['temp'];
+                    let temperature = data['main']['temp'];
                     let weatherDes = data.weather[0]['main'];
                     let weatherIcon = data.weather[0]['icon'];
-                    var weatherStatusIcon = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
 
-                    document.getElementById('cityCountryName').innerText = cityName+', '+countryName;
+                    document.getElementById('cityCountryName').innerText = cityName + ', ' + countryName;
                     document.getElementById('temperature').innerText = temperature;
                     document.getElementById('weatherDes').innerText = weatherDes;
-                    document.getElementById('weatherStatusIcon').append = weatherStatusIcon;
-
+                    document.getElementById('weatherStatusIcon').setAttribute("src",
+                        "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
                 })
 
                 .catch(error => alert('Wrong City Name'));
+
         })
     </script>
 

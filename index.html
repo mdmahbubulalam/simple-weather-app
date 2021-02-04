@@ -38,11 +38,11 @@
 
     <script>
         const cityInput = document.getElementById('cityInput');
+        const apiKey = '25b07f69a8c8d7611c1b17daa52eaca1';
 
         document.getElementById('searchBtn').addEventListener('click', function () {
 
-            fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityInput.value +
-                    '&appid=25b07f69a8c8d7611c1b17daa52eaca1&units=metric')
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + cityInput.value +`&appid=${apiKey}&units=metric`)
 
                 .then(res => res.json())
                 .then(data => {
